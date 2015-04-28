@@ -1,0 +1,9 @@
+#NEXUS
+Begin Taxa;
+ Dimensions NTax=6;
+ TaxLabels A B C D D1 D2;
+End;
+Begin Trees;
+ Tree tree1=[&U]((A:0.10200,B:0.23000):0.06000,C:0.40000):0.00000;
+Tree tree2=[&U]((D:0.10200,D1:0.23000):0.06000,D2:0.40000):0.00000;
+End;
