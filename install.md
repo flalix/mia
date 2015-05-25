@@ -62,11 +62,11 @@ mkdir mia
 
 ## Running MIA
 
-Once cloned or dowloaded (and unziped) MIA archives, you will find the executable file (binary) at:  
+Once cloned or downloaded (and unzipped) MIA archives, you will find the executable file (binary) at:  
 
-  - if windows:  c:\\user\\your_name\\mia\\exe\\windows  
+  - in Windows:  c:\\Users\\your_name\\mia\\exe\\windows  
   
-  - if linux: ~/mia/exe/linux 
+  - in Linux: ~/mia/exe/linux 
   
 Give a double click in MIA and start it.  
 
@@ -77,7 +77,7 @@ Give a double click in MIA and start it.
 
 ## First time at front end and what to do?
 
-If you stared MIA correctly this front end will appear:
+If you started MIA correctly this front end will appear:
 
 ![MIA front end](https://github.com/flalix/mia/blob/master/image/mia_first_time.png?raw=true)
 
@@ -86,36 +86,34 @@ If you stared MIA correctly this front end will appear:
 Now you have four alternatives to start your analysis:  
 
 1. Click in [Get GBK from NCBI] and you will download all gbk from the organism "Drosophila" and gene "Adh".  
-2.	Change "Adh" to "AMY" and in Gene List write "AMY, AMYREL", and click in [Get GBK from NCBI] and you will analyze a short and interesting sample data.  
-3.	You also may define your own Organism and Gene. If necessary you may define words in Title to find any desired gene-experiment.
-4.	Another possible way is to see a previous analysis that we did. In mia/data you will find 2 set of samples. One for "Adh" and the other for "AMY".  
+2.	Change "Adh" to "AMY" and in Gene List write "AMY, AMYREL", and click in [Get GBK from NCBI] and you will analyze a short sample data.  
+3.	You also may define your own Organism and Gene. If necessary you may define words in Title to find any desired gene-experiment by NCBI titles.
+4.	Another possible way is to get Adh or AMY gene data already analyzed. In mia/data you will find 2 set of samples. One for "Adh" and the other for "AMY".  
 
   - click in "save" and exit the MIA program  
-  - look for:
-    + in windows:  c:\\user\\your_name\\Drosophila\\data
-    + in linux: ~/Drosophila/data  
+  - •	go to your clone/download directory and find data/Adh and data/AMY:
+    + in Windows:  clone_dir\data\Drosophila
+    + in Linux: clone_dir/data/Drosophila  
     
-  - you will find /data/Adh  
+  - you will find .../data/Drosophila/Adh  
+  - and also /data/Drosophila/AMY  
+<br />  
+  - copy each fasta.rar and files.rar to the Adh root (ou AMY)  .../data/Drosophyla/Adh:
   
-  - create also /data/AMY  
-  - go to your clone/download directory and find data/adh and data/AMY  
-  
-  - copy each fasta.rar and files.rar to its respective directory  
-  
-  - decompress and you will find:  
+  - decompress and you will observe data at:  
     + ../ Drosophila/data/Adh/fasta  
     + ../ Drosophila/data/Adh/files  
     
-  - both directories have many files inside  
+  - both directories have many ASCII files inside  
   
-  - in mia/data you will find **"default.ini"**, **overwrite** it in ../ Drosophila/ data  
+  - in mia/data you will find **"default.ini"**, **overwrite** it in ../Drosophila/data to get access to AMY in MIA 
   
   - find again MIA executable (binary) and **start it**  
   
-  - in the first combo box you will find " Drosophila - Adh" and " Drosophila - AMY".  
-  - choose one of these options  
-  - jump (click) in VMI, or HMI, or JSD or Cluster tab and see the results  
-  - any other information sarch in the MIA manual, please  
+  - in the first combo box you will find " Drosophila - Adh" and " Drosophila - AMY" if you have copied “default .ini” correctly.  
+  - then, choose one of these options:  
+  -- jump (click) in VMI, or HMI, or JSD or Cluster tab and see the results (don’t save neither recalculate again, reset the check buttons).  
+  -- any other information access MIA manual, please  
   
 
 
