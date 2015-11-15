@@ -1,3 +1,0 @@
-C:\Users\Flavio\workspace>c:\python27\Scripts\pyinstaller --noconfirm --workpath
-="C:\Users\Flavio\workspace\mi_analyzer" "C:\Users\Flavio\workspace\mi_analyzer\
-modules\pipe_desktop.py"  --name=mia
