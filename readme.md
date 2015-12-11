@@ -1,7 +1,7 @@
 ---
 title: "MIA"
 author: "Flavio Lichtenstein"
-date: "Wednesday, April 29, 2015"
+date: "December 11, 2015"
 output: html_document
 ---
 
@@ -13,6 +13,18 @@ Federal University of Sao Paulo (UNIFESP), DIS-Bioinformatics
 
 **Summary:** Mutual Information Analyzer (MIA) is a pipeline written in Python with the intent to calculate Vertical Entropy, Vertical and Horizontal Mutual Information. From VH, VMI and HMI distributions, Jensen-Shannon Divergence (JSD) is calculated to estimate the distances between species sequences. Each pair of mutual information distribution distances with their respective standard errors are calculated and stored in distance matrices. These distances between distributions can be presented as histograms or hierarchical cluster dendrograms.    
 <br />
+
+#### How to install:
+
+**see install document** 
+
+We did an executable for Windows and Linux, with PyInstaller, but at the end it **didn't work** (I don't know why). We apologize. 
+
+Since we open the source code you can execute by command line, but first you must **install some libraries** and **set a python path**. 
+
+<br />
+
+ 
 
 #### Methods:
     
@@ -86,5 +98,14 @@ HMI and VMI are calculated with and without bias corrections, therefore, the gai
 **Hierarchical Cluster**
 
 ![Hierarchical Cluster](https://github.com/flalix/mia/blob/master/image/Cluster_JSD_HMI_Drosophila_maxmer_Gene_Adh_frame0_NOL1_100L_cutoff7_bias_corr.png?raw=true)
+
+
+<br />
+
+  
+**Soon: a nonparametric classifier**
+
+We developed also a MI_Classifier, a non parametric classifier. You give all sequences in a fasta file, it calculates MI spectra and JSD distances, and export the Informational Dendrogram to Figtree. It is in test.
+
 
 

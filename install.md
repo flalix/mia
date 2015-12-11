@@ -1,7 +1,7 @@
 ---
 title: "MIA"
 author: "Flavio Lichtenstein"
-date: "Wednesday, April 29, 2015"
+date: "December 11, 2015"
 output: html_document
 ---
 
@@ -44,7 +44,7 @@ git clone https://github.com/flalix/mia/
   - Create a directory in windows:
 
 cd c:\\Users\\your_name  
-md mia  
+md mia 
 
 <br />
 
@@ -56,19 +56,107 @@ mkdir mia
 
 <br />
 
-  - and **decompress the zip file here in mia directory**
+  - and **decompress the zip file here in mia directory**  
 
 <br />
 
-## Running MIA
+## Running MIA  
 
-Once cloned or downloaded (and unzipped) MIA archives, you will find the executable file (binary) at:  
+Once cloned or dowloaded (and unziped) MIA archives, you will find the source code at:  
 
-  - in Windows:  c:\\Users\\your_name\\mia\\exe\\windows  
+  - if windows:  c:\\user\\your_name\\mia\\src  
   
-  - in Linux: ~/mia/exe/linux 
+  - if linux: ~/mia/src  
   
-Give a double click in MIA and start it.  
+<br />
+
+We did an executable for Windows and Linux, with PyInstaller, but at the end it didn't work (I don't know why). We apologize. Since we open the source code you can execute by command line.  
+<br />
+
+Therefore, **you must**:  
+  - create a new directory called “mi_analyzer”  
+  
+  - move the “src” contents to mi_analyzer directory  
+  
+  - install the libs (dependencies)  
+  
+  - set a path  
+  
+  - execute  
+  
+<br />
+
+**Create a directory:**  
+
+  - in Windows:  
+  
+    + run cmd.exe  
+    
+    + md mi_analyzer  
+    
+<br />
+
+
+  - in Linux:  
+  
+    + run terminal  
+  
+    + mkdir mi_analyzer  
+  
+<br />  
+
+
+**Moving the source code:**  
+
+  - after cloned/downloaded you will find the "mia/src" directory  
+  
+  - move **it contents** (classes, modules ... ) to the new directory "mi_analyzer"  
+  
+<br /> 
+
+**Installing mi_analyzer python dependencies (libs):** 
+
+  - numpy and scipy 
+  
+  - biopython 
+  
+  - matplotlib 
+  
+  - ete2  # to see trees - Mr.Bayes parameters analyzer 
+  
+
+<br /> 
+
+**Command line in Windows:**
+
+  - Since the source code is in c:\\users\\my_name\\mi_analyzer 
+  
+    + run cmd.exe 
+  
+    + cd mi_analyzer 
+  
+  - set path 
+  
+    + set PYTHONPATH=.;./classes;./modules;%PYTHONPATH%  
+  
+  - execute (command line)  
+  
+    + python modules/pipe_desktop.py  
+  
+
+<br /> 
+
+**Command line in Linux:**  
+
+  - Since the source code is in ~/mi_analyzer (run terminal)  
+
+    + cd mi_analyzer  
+
+    + export PYTHONPATH=.:./classes:./modules:$PYTHONPATH  
+
+  - execute (command line)  
+
+    + python modules/pipe_desktop.py  
 
 
 <br />
@@ -77,7 +165,7 @@ Give a double click in MIA and start it.
 
 ## First time at front end and what to do?
 
-If you started MIA correctly this front end will appear:
+If you stared MIA correctly this front end will appear:
 
 ![MIA front end](https://github.com/flalix/mia/blob/master/image/mia_first_time.png?raw=true)
 
@@ -86,34 +174,36 @@ If you started MIA correctly this front end will appear:
 Now you have four alternatives to start your analysis:  
 
 1. Click in [Get GBK from NCBI] and you will download all gbk from the organism "Drosophila" and gene "Adh".  
-2.	Change "Adh" to "AMY" and in Gene List write "AMY, AMYREL", and click in [Get GBK from NCBI] and you will analyze a short sample data.  
-3.	You also may define your own Organism and Gene. If necessary you may define words in Title to find any desired gene-experiment by NCBI titles.
-4.	Another possible way is to get Adh or AMY gene data already analyzed. In mia/data you will find 2 set of samples. One for "Adh" and the other for "AMY".  
+2.	Change "Adh" to "AMY" and in Gene List write "AMY, AMYREL", and click in [Get GBK from NCBI] and you will analyze a short and interesting sample data.  
+3.	You also may define your own Organism and Gene. If necessary you may define words in Title to find any desired gene-experiment.
+4.	Another possible way is to see a previous analysis that we did. In mia/data you will find 2 set of samples. One for "Adh" and the other for "AMY".  
 
   - click in "save" and exit the MIA program  
-  - •	go to your clone/download directory and find data/Adh and data/AMY:
-    + in Windows:  clone_dir\data\Drosophila
-    + in Linux: clone_dir/data/Drosophila  
+  - look for:
+    + in windows:  c:\\user\\your_name\\Drosophila\\data
+    + in linux: ~/Drosophila/data  
     
-  - you will find .../data/Drosophila/Adh  
-  - and also /data/Drosophila/AMY  
-<br />  
-  - copy each fasta.rar and files.rar to the Adh root (ou AMY)  .../data/Drosophyla/Adh:
+  - you will find /data/Adh  
   
-  - decompress and you will observe data at:  
+  - create also /data/AMY  
+  - go to your clone/download directory and find data/adh and data/AMY  
+  
+  - copy each fasta.rar and files.rar to its respective directory  
+  
+  - decompress and you will find:  
     + ../ Drosophila/data/Adh/fasta  
     + ../ Drosophila/data/Adh/files  
     
-  - both directories have many ASCII files inside  
+  - both directories have many files inside  
   
-  - in mia/data you will find **"default.ini"**, **overwrite** it in ../Drosophila/data to get access to AMY in MIA 
+  - in mia/data you will find **"default.ini"**, **overwrite** it in ../ Drosophila/ data  
   
-  - find again MIA executable (binary) and **start it**  
+  - run again **python modules/pipe_desktop.py**, restart it  
   
-  - in the first combo box you will find " Drosophila - Adh" and " Drosophila - AMY" if you have copied “default .ini” correctly.  
-  - then, choose one of these options:  
-  -- jump (click) in VMI, or HMI, or JSD or Cluster tab and see the results (don’t save neither recalculate again, reset the check buttons).  
-  -- any other information access MIA manual, please  
+  - in the first combo box you will find " Drosophila - Adh" and " Drosophila - AMY".  
+  - choose one of these options  
+  - jump (click) in VMI, or HMI, or JSD or Cluster tab and see the results  
+  - any other information sarch in the MIA manual, please  
   
 
 
