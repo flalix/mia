@@ -128,7 +128,6 @@ class Pipe():
 
    
             if desk.saveData:
-
                 if not self.imi.entFile.write_file(desk.rootTable, filename_dist_mat, stri, True):
                     return False
                 
@@ -141,12 +140,30 @@ class Pipe():
                 if not self.imi.entFile.write_file(desk.rootTable, filename, striSummary, True):
                     return False
     
+    
+            listSpecies = self.get_species(desk)
+            self.imi.ttest_MI_species_data(desk, listSpecies, dicMI)
+            
             if desk.showGraph or desk.saveGraph:
                 self.jsd.plot_JSD_MI(desk, dicMI, xlabel, ylabel)
 
            
         return True
 
+    def get_species(self, desk):
+        lista = desk.speciesListbox.get(0,END)
+        listSpecies = []
+       
+        for line in lista:
+            species = desk.find_species(line)
+            
+            mat = desk.dicParams[species]
+
+            if mat[0] == 'x':
+                listSpecies.append(species)
+                
+        return listSpecies
+    
 
     def read_and_calc(self, desk):
         seqSpecies = []

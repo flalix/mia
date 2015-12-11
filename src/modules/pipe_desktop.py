@@ -12,6 +12,7 @@ Updated on 24/03/2015 - no log check searchBox
 Updated on 07/08/2015 - no more dollar var
 Updated on 27/08/2015 - mrbayes and classifier
 Updated on 06/10/2015 - get_params()
+Updated on 12/12/2015 - erros - vars init 
 
 @author: Flavio Lichtenstein
 @local: Unifesp DIS - Bioinformatica
@@ -20,7 +21,6 @@ import os, sys, copy, gc, platform
 import ttk, tkMessageBox, tkFont, Tkinter as tk
 from Tkinter import END #DISABLED, ACTIVE
 from subprocess import call
-from pip._vendor.distlib.compat import which
 ''' # BOTTOM, LEFT, RIGHT, TOP, CENTER, N, NE, E, SE, S, SW, tk.NW, CENTER '''
 # from Tkinter import tk.Frame,Radiobutton, tk.Checkbutton, Entry, tk.StringVar, tk.IntVar, tk.BooleanVar
 from Bio import SeqIO
@@ -161,7 +161,11 @@ class Desktop(tk.Frame):
         
         # attach cursor to this widget
         self.cursor = tk_root.cget("cursor")
-         
+        
+        ''' Flavio 15/11/2015 '''
+        self.tabChangedEvent(self)
+        
+        
     def warning(self, stri):
         tkMessageBox.showinfo('warning', stri)
         
@@ -2049,7 +2053,7 @@ class Desktop(tk.Frame):
                     self.numSimLoops = int(lines[85])
                 except:
                     self.NminSamples = 6
-                    self.numSimLoops = 10
+                    self.numSimLoops = 50
                   
                 try:
                     self.figtree_path = lines[86]
@@ -2070,7 +2074,7 @@ class Desktop(tk.Frame):
                     self.mrBayes_replace02 = "pseudoobscura, persimilis: pseudo_persi"
                     self.mrBayes_replace03 = ""
                     self.mrBayes_replace04 = ""
-                    self.string_kill = '_%s_Prod_'%self.gene()
+                    self.string_kill = '_Adh_Prod_'
                     self.colaps_tree = True
                     self.aligned_consensus = "consensus"
 
@@ -2102,7 +2106,7 @@ class Desktop(tk.Frame):
                 try:
                     self.burnin = float(lines[99])
                 except:
-                    self.burnin = .25
+                    self.burnin = .02
                                        
                 try:
                     self.mrBayes_fn01_cov = lines[100]
@@ -2227,6 +2231,70 @@ class Desktop(tk.Frame):
             self.is3D = False
                     
             self.start_stop_codon = False
+            if self.isWindows:
+                self.mrBayes_path = "c:/mrbayes/"
+            else:
+                self.mrBayes_path = self.home + '/mrbayes/'
+
+            self.piA = True
+            self.piC = True
+            self.piG = True
+            self.piT = True
+            self.rAC = True
+            self.rAG = True
+            self.rAT = True
+            self.rCG = True
+            self.rCT = True
+            self.rGT = True
+            self.LnL = True
+            self.LnPr  = True
+            self.TL    = True
+            self.alpha = True
+            self.off_on = True
+            self.on_off = True
+            self.pinvar = True
+            self.LnL_HMean = True     
+            
+            self.NminSamples = 6
+            self.numSimLoops = 50
+            
+            if self.isWindows:
+                self.figtree_path = "C:/FigTree v1.4.2/FigTree v1.4.2.exe"
+            else:
+                self.figtree_path = "Figtree"
+                        
+            self.mrBayes_replace01 = "americana: americana"
+            self.mrBayes_replace02 = "pseudoobscura, persimilis: pseudo_persi"
+            self.mrBayes_replace03 = ""
+            self.mrBayes_replace04 = ""
+            
+            self.string_kill = '_Adh_Prod_'
+            self.colaps_tree = True
+            self.aligned_consensus = "consensus"
+
+            self.standard_covarion = "standard"
+
+            self.mrBayes_fn01 = ('%s_%s_%s_%s_%iL_cutoff%i_%s.nxs') %\
+                 (self.organism, "mincut", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"aligned")
+            self.mrBayes_fn02 = ('%s_%s_%s_%s_%iL_cutoff%i_%s.nxs') %\
+                 (self.organism, "mincut", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"consensus")
+            self.mrBayes_fn03 = ('%s_%s_%s_%s_%iL_cutoff%i_%s.nxs') %\
+                 (self.organism, "maxmer", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"aligned")
+            self.mrBayes_fn04 = ('%s_%s_%s_%s_%iL_cutoff%i_%s.nxs') %\
+                 (self.organism, "maxmer", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"consensus")
+
+            self.burnin = .02
+
+            self.mrBayes_fn01_cov = ('%s_%s_%s_%s_%iL_cutoff%i_%s_covarion.nxs') %\
+                 (self.organism, "mincut", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"aligned")
+            self.mrBayes_fn02_cov = ('%s_%s_%s_%s_%iL_cutoff%i_%s_covarion.nxs') %\
+                 (self.organism, "mincut", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"consensus")
+            self.mrBayes_fn03_cov = ('%s_%s_%s_%s_%iL_cutoff%i_%s_covarion.nxs') %\
+                 (self.organism, "maxmer", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"aligned")
+            self.mrBayes_fn04_cov = ('%s_%s_%s_%s_%iL_cutoff%i_%s_covarion.nxs') %\
+                 (self.organism, "maxmer", self.seqType, self.gene_title, self.cutoffLength, self.cutoffNumSeq,"consensus")
+          
+            self.rand_method = "standard"                      
 
         self.set_paths()
 
@@ -2242,8 +2310,6 @@ class Desktop(tk.Frame):
             self.build_listSpecies()
             self.filter_listSpecies(mode=self.rb_seq_filter_var.get(), cutoff=self.cutoffNumSeq_var.get())
         '''
-
-
         return True
             
     def set_defaults(self, organism='Drosophila', gene='Adh'):
@@ -2295,7 +2361,7 @@ class Desktop(tk.Frame):
         self.stri_random = ""
         self.label_random = ""
         
-        self.burnin = .25
+        self.burnin = .02
                         
                                   
     def set_paths(self):    
@@ -2489,6 +2555,29 @@ class Desktop(tk.Frame):
         self.mrBayes_replace03_var.set(self.mrBayes_replace03)
         self.mrBayes_replace04_var.set(self.mrBayes_replace04)
         self.string_kill_var.set(self.string_kill)
+
+        ''' flavio 12/12/2015 '''
+        self.piA_var.set(self.piA)
+        self.piC_var.set(self.piC)
+        self.piG_var.set(self.piG)
+        self.piT_var.set(self.piT)
+
+        self.rAC_var.set(self.rAC)
+        self.rAG_var.set(self.rAG)
+        self.rAT_var.set(self.rAT)
+        self.rCG_var.set(self.rCG)
+        self.rCT_var.set(self.rCT)
+        self.rGT_var.set(self.rGT)
+
+        self.LnL_var.set(self.LnL)
+        self.LnPr_var.set(self.LnPr)
+        self.TL_var.set(self.TL)
+        self.alpha_var.set(self.alpha)
+        self.pinvar_var.set(self.pinvar)
+        self.LnL_HMean_var.set(self.LnL_HMean)
+
+        self.off_on_var.set(self.off_on)
+        self.on_off_var.set(self.on_off)
 
         self.mrBayes_fn01_var.set(self.mrBayes_fn01)
         self.mrBayes_fn02_var.set(self.mrBayes_fn02)
@@ -2786,10 +2875,13 @@ class Desktop(tk.Frame):
         
 
     def onClickSpeciesBox(self, e):
-        stri = self.speciesListbox.selection_get()
-        self.species = self.find_species(stri)
-        self.species_var.set(self.species)
-
+        ''' Flavio 15/11/2015 '''
+        try:
+            stri = self.speciesListbox.selection_get()
+            self.species = self.find_species(stri)
+            self.species_var.set(self.species)
+        except:
+            pass
         
     def onClickSpeciesBoxInvert(self, evt):
         lista = self.speciesListbox
@@ -2928,15 +3020,17 @@ class Desktop(tk.Frame):
     def drawText(self, row):
         frameFooter = tk.Frame(self.tk_root, borderwidth=3, relief=tk.RAISED)
 
-        ''' must review !!! '''       
+        ''' must review !!!       
         if self.isWindows:
             textAreaHeight = 10
             textAreaWidth = 90
         else:
             textAreaHeight = 30
-            textAreaWidth = 148
+            textAreaWidth = 148 ''' 
 
-        
+        textAreaHeight = 10
+        textAreaWidth = mainFrameWidth
+            
         self.text_area = tk.Text(frameFooter,  height=textAreaHeight, width=textAreaWidth,  bg='light cyan') # 
  
         ''' orient="vertical", '''
@@ -2981,8 +3075,11 @@ class Desktop(tk.Frame):
     def tabChangedEvent(self,event):
         # print event.widget.tab(event.widget.index("current"),"text")
         #self.labelroot_var.set(event.widget.tab(event.widget.index("current"),"text"))
-       
-        self.tab_caption = event.widget.tab(event.widget.index("current"),"text")
+        ''' Flavio 15/11/2015 '''
+        try:
+            self.tab_caption = event.widget.tab(event.widget.index("current"),"text")
+        except:
+            pass
         
         if self.tab_caption == 'VMI':
             self.buttonRun1['text'] = 'Vertical Entropy'
@@ -3589,6 +3686,8 @@ class StdoutDirector(IODirector):
     
 tk_root = tk.Tk()
 width, height = tk_root.winfo_screenwidth()*.98, tk_root.winfo_screenheight()*.9
+
+# print "w", width, "  h", height 
 
 x_center = (tk_root.winfo_screenwidth() // 2) - (width // 2)
 y_center = (tk_root.winfo_screenheight() // 2) - (height // 2)
